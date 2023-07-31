@@ -52,7 +52,7 @@ namespace N_m3u8DL_RE.Util
         public static bool StartPipeMux(string binary, string[] pipeNames, string outputPath)
         {
             string dateString = DateTime.Now.ToString("o");
-            StringBuilder command = new StringBuilder("-y -fflags +genpts -loglevel quiet ");
+            StringBuilder command = new StringBuilder("-y -loglevel quiet ");
 
             string? customDest = Environment.GetEnvironmentVariable("RE_LIVE_PIPE_OPTIONS");
 
@@ -75,7 +75,7 @@ namespace N_m3u8DL_RE.Util
                 command.Append($" -map {i} ");
             }
 
-            command.Append(" -strict unofficial -c copy ");
+            command.Append(" -strict unofficial -fflags +genpts+igndts -c copy ");
             command.Append($" -metadata date=\"{dateString}\" ");
             command.Append($" -ignore_unknown -copy_unknown ");
 
